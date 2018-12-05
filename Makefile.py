@@ -1,7 +1,7 @@
 
 # This is a Makefile for the `mk` tool. (Limited) details for that here:
 # <http://svn.openkomodo.com/openkomodo/browse/mk>
-
+from builtins import input, str
 import sys
 import os
 from os.path import join, dirname, normpath, abspath, exists, basename
@@ -58,7 +58,7 @@ class cut_a_release(Task):
             if answer != "yes":
                 self.log.info("user abort")
                 return
-            print "* * *"
+            print("* * *")
         self.log.info("cutting a %s release", version)
 
         # Checks: Ensure there is a section in changes for this version.
@@ -79,7 +79,7 @@ class cut_a_release(Task):
             if answer != "no":
                 self.log.info("abort")
                 return
-            print "* * *"
+            print("* * *")
         top_body = changes_sections[0][2]
         if top_body.strip() == "(nothing yet)":
             raise MkError("top section body is `(nothing yet)': it looks like "
@@ -244,7 +244,7 @@ def query_yes_no(question, default="yes"):
 
     while 1:
         sys.stdout.write(question + prompt)
-        choice = raw_input().lower()
+        choice = input().lower()
         if default is not None and choice == '':
             return default
         elif choice in valid.keys():
@@ -311,7 +311,7 @@ def _walk(top, topdown=True, onerror=None, follow_symlinks=False):
     # left to visit.  That logic is copied here.
     try:
         names = os.listdir(top)
-    except OSError, err:
+    except OSError as err:
         if onerror is not None:
             onerror(err)
         return
@@ -437,7 +437,7 @@ def _paths_from_path_patterns(path_patterns, files=True, dirs="never",
                         lexists, islink, realpath
     from glob import glob
 
-    assert not isinstance(path_patterns, basestring), \
+    assert not isinstance(path_patterns, str), \
         "'path_patterns' must be a sequence, not a string: %r" % path_patterns
     GLOB_CHARS = '*?['
 
