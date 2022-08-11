@@ -1,9 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
-try:
-    from django.utils.encoding import force_text
-except ImportError:
-    from django.utils.encoding import force_unicode as force_text
+from django.utils.encoding import force_str as force_text
 
 import markdown_deux
 from markdown_deux.conf import settings
@@ -74,5 +71,3 @@ def markdown_allowed():
     return ('<a href="%s" target="_blank">Markdown syntax</a> allowed, but no raw HTML. '
         'Examples: **bold**, *italic*, indent 4 spaces for a code block.'
         % settings.MARKDOWN_DEUX_HELP_URL)
-
-
